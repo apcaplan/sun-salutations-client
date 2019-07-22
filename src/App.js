@@ -11,6 +11,8 @@ import ChangePassword from './auth/components/ChangePassword'
 
 import RecordCreate from './records/RecordCreate'
 import RecordShow from './records/RecordShow'
+import Record from './records/Record'
+import RecordEdit from './records/RecordEdit'
 
 import Alert from 'react-bootstrap/Alert'
 
@@ -63,6 +65,12 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/records' render={() => (
             <RecordShow alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/record' render={() => (
+            <Record alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/edit-record' render={() => (
+            <RecordEdit alert={this.alert} user={user} />
           )} />
         </main>
       </React.Fragment>

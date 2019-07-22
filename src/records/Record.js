@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../apiConfig'
 import Layout from '../Layout'
 
-const RecordFind = props => {
+const Record = props => {
   const [record, setRecord] = useState(null)
+  const [deleted, setDeleted] = useState(false)
 
   useEffect(() => {
     axios(`${apiUrl}/records/${props.match.params.id}`)
@@ -13,8 +14,23 @@ const RecordFind = props => {
       .catch(console.error)
   }, [])
 
+  const destroy = () => {
+    axios({
+      url: `${apiUrl}/records/${props.match.params.id}`,
+      method: 'DELETE'
+    })
+      .then(() => setDeleted(true))
+      .catch(console.error)
+  }
+
   if (!record) {
     return <p>Loading...</p>
+  }
+
+  if (deleted) {
+    return <Redirect to={
+      { pathname: '/', state: { msg: 'Record successfully deleted!' } }
+    } />
   }
 
   return (
@@ -23,6 +39,7 @@ const RecordFind = props => {
       <p> Rounds completed: {record.rounds_completed}</p>
       <p> Rounds set: {record.rounds_set}</p>
       <p> Notes: {record.notes}</p>
+      <button onClick={destroy}>Delete Record</button>
       <Link to={`/records/${props.match.params.id}/edit`}>
         <button>Edit</button>
       </Link>
@@ -31,4 +48,4 @@ const RecordFind = props => {
   )
 }
 
-export default RecordFind
+export default Record
