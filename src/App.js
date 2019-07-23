@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.scss'
 import { Route } from 'react-router-dom'
-
+import { SnackbarProvider } from 'notistack'
 import AuthenticatedRoute from './auth/components/AuthenticatedRoute'
 import Header from './header/Header'
 import SignUp from './auth/components/SignUp'
@@ -14,15 +14,12 @@ import Records from './records/Records'
 import Record from './records/Record'
 import RecordEdit from './records/RecordEdit'
 
-import Alert from 'react-bootstrap/Alert'
-
 class App extends Component {
   constructor () {
     super()
 
     this.state = {
-      user: null,
-      alerts: []
+      user: null
     }
   }
 
@@ -30,23 +27,12 @@ class App extends Component {
 
   clearUser = () => this.setState({ user: null })
 
-  alert = (message, type) => {
-    this.setState({ alerts: [...this.state.alerts, { message, type }] })
-  }
-
   render () {
-    const { alerts, user } = this.state
+    const { user } = this.state
 
     return (
-      <React.Fragment>
+      <SnackbarProvider maxSnack={3}>
         <Header user={user} />
-        {alerts.map((alert, index) => (
-          <Alert key={index} dismissible variant={alert.type}>
-            <Alert.Heading>
-              {alert.message}
-            </Alert.Heading>
-          </Alert>
-        ))}
         <main className="container">
           <Route path='/sign-up' render={() => (
             <SignUp alert={this.alert} setUser={this.setUser} />
@@ -73,7 +59,7 @@ class App extends Component {
             <RecordEdit alert={this.alert} user={user} />
           )} />
         </main>
-      </React.Fragment>
+      </SnackbarProvider>
     )
   }
 }
