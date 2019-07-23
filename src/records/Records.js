@@ -4,38 +4,36 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Layout from '../Layout'
 
-class RecordShow extends Component {
+class Records extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
       records: [],
-      loaded: false,
-      error: null
+      error: null,
+      deleted: false
     }
   }
 
-  async componentDidMount () {
-    try {
-      const response = await axios(`${apiUrl}/records`)
-      this.setState({ records: response.data.records, loaded: true })
-    } catch (err) {
-      console.error(err)
-      this.setState({ error: err.message })
-    }
+  componentDidMount () {
+    axios(`${apiUrl}/records`, {
+      headers: { Authorization: `Token token=${this.props.user.token}` }
+    })
+      .then(res => this.setState({ records: res.data.records }))
+      .catch(err => this.setState({ error: err.stack }))
   }
 
   render () {
-    const { records, error, loaded } = this.state
+    const { records, error } = this.state
     const recordsList = records.map(record => (
       <li key={record.id}>
-        <Link to={`/records/${record.id}`}>{record.title}</Link>
+        <Link to={`/records/${record.id}`}>{record.date} {record.rounds_completed} {record.rounds_set} {record.notes}</Link>
       </li>
     ))
 
-    if (!loaded) {
-      return <p>Loading...</p>
-    }
+    // if (!loaded) {
+    //   return <p>Loading...</p>
+    // }
 
     if (records.length === 0) {
       return <p>No records to display yet</p>
@@ -56,4 +54,4 @@ class RecordShow extends Component {
   }
 }
 
-export default RecordShow
+export default Records

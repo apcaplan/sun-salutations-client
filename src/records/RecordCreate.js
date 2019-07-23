@@ -4,6 +4,7 @@ import Layout from '../Layout'
 import RecordForm from './RecordForm'
 import axios from 'axios'
 import apiUrl from '../apiConfig'
+// import apiUrl from '../apiConfig'
 
 class RecordCreate extends Component {
   constructor (props) {
@@ -32,10 +33,18 @@ class RecordCreate extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    axios.post(`${apiUrl}/records`,
-      {
+    console.log(this.props.user.token)
+    axios({
+      url: `${apiUrl}/records`,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token token=${this.props.user.token}`
+      },
+      data: {
         record: this.state.record
-      })
+      }
+    })
       .then(res => this.setState({ createdRecordId: res.data.record.id }))
       .catch(console.error)
   }

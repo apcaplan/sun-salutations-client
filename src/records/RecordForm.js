@@ -14,15 +14,15 @@ const RecordForm = ({ record, handleChange, handleSubmit, cancelPath }) => (
     <label>Rounds completed</label>
     <input
       placeholder="Number of rounds"
-      value={record.roundsCompleted}
-      name="roundsCompleted"
+      value={record.rounds_completed}
+      name="rounds_completed"
       onChange={handleChange}
     />
     <label>Rounds set</label>
     <input
       placeholder="Enter number of rounds set"
-      value={record.roundsSet}
-      name="roundsSet"
+      value={record.rounds_set}
+      name="rounds_set"
       onChange={handleChange}
     />
     <label>Notes</label>
