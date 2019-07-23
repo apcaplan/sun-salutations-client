@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import Layout from '../Layout'
 import RecordForm from './RecordForm'
 import axios from 'axios'
@@ -15,7 +15,9 @@ const RecordEdit = props => {
   const [updated, setUpdated] = useState(false)
 
   useEffect(() => {
-    axios(`${apiUrl}/records/${props.match.params.id}`)
+    axios(`${apiUrl}/records/${props.match.params.id}`, {
+      headers: { Authorization: `Token token=${props.user.token}` }
+    })
       .then(res => setRecord(res.data.record))
       .catch(console.error)
   }, [])
@@ -29,6 +31,7 @@ const RecordEdit = props => {
     event.preventDefault()
     axios({
       url: `${apiUrl}/records/${props.match.params.id}`,
+      headers: { Authorization: `Token token=${props.user.token}` },
       method: 'PATCH',
       data: { record }
     })
@@ -52,4 +55,4 @@ const RecordEdit = props => {
   )
 }
 
-export default RecordEdit
+export default withRouter(RecordEdit)
