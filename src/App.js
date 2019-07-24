@@ -13,6 +13,8 @@ import RecordCreate from './records/RecordCreate'
 import Records from './records/Records'
 import Record from './records/Record'
 import RecordEdit from './records/RecordEdit'
+import Counter from './counter/Counter'
+import SuryaNamaskar from './suryaNamaskar/SuryaNamaskar'
 
 class App extends Component {
   constructor () {
@@ -57,6 +59,12 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/records/:id/edit-record' render={() => (
             <RecordEdit alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/counter' render={() => (
+            <Counter alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/SuryaNamaskar' render={() => (
+            <SuryaNamaskar alert={this.alert} user={user} />
           )} />
         </main>
       </SnackbarProvider>

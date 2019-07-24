@@ -9,7 +9,6 @@ const Record = props => {
   const [deleted, setDeleted] = useState(false)
 
   useEffect(() => {
-    console.log('token is:', props.user.token)
     axios(`${apiUrl}/records/${props.match.params.id}`, {
       headers: { Authorization: `Token token=${props.user.token}` }
     })
