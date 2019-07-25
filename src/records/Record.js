@@ -3,6 +3,7 @@ import { Link, Redirect, withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../apiConfig'
 import Layout from '../Layout'
+// import { destroy } from '../api'
 
 const Record = props => {
   const [record, setRecord] = useState(null)

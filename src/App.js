@@ -51,13 +51,13 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/add-record' render={() => (
             <RecordCreate alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/records' render={() => (
+          <AuthenticatedRoute user={user} exact path='/records' render={() => (
             <Records alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/records/:id' render={() => (
             <Record alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/records/:id/edit-record' render={() => (
+          <AuthenticatedRoute user={user} exact path='/records/:id/edit-record' render={() => (
             <RecordEdit alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/counter' render={() => (

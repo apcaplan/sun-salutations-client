@@ -52,7 +52,8 @@ class Records extends Component {
       <nav>
         <h1>Progress Record</h1>
         <SimpleTable
-          rows={ records }
+          records={ records }
+          user={this.props.user}
         />
       </nav>
     )
