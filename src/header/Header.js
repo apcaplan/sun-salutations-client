@@ -39,7 +39,6 @@ const Header = ({ user }) => {
               <Button className={classes.menuButton} component={Link} to="/suryaNamaskar">Practice!</Button>
               <Button className={classes.menuButton} component={Link} to="/counter">Rounds Tracker</Button>
               <Button className={classes.menuButton} component={Link} to="/records">Show Records</Button>
-              <Button className={classes.menuButton} component={Link} to="/add-record">Add Record</Button>
               <Button className={classes.menuButton} component={Link} to="/change-password">Change Password</Button>
               <Button className={classes.menuButton} component={Link} to="/sign-out">Sign Out</Button>
             </React.Fragment>

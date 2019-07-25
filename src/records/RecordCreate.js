@@ -33,7 +33,8 @@ class RecordCreate extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log(this.props.user.token)
+    console.log(this.state.record)
+
     axios({
       url: `${apiUrl}/records`,
       method: 'POST',

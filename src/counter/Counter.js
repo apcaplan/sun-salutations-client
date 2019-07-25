@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid'
-import axios from 'axios'
-import apiUrl from '../apiConfig'
+// import axios from 'axios'
+// import apiUrl from '../apiConfig'
 import { Redirect } from 'react-router-dom'
 import { withSnackbar } from 'notistack'
 import messages from '../auth/messages'
+import { create } from '../records/recordApi'
 
 class Counter extends Component {
   constructor (props) {
@@ -20,40 +21,37 @@ class Counter extends Component {
     })
   }
 
-  onSave = () => {
-    const roundsCompleted = this.state.count
-    const dateToday = new Date().getDate()
-    const { enqueueSnackbar } = this.props
+  // RecordCreate()
 
-    // RecordCreate()
-
-    axios({
-      url: `${apiUrl}/records`,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token token=${this.props.user.token}`
-      },
-      data: {
-        record: {
-          date: dateToday,
-          roundsCompleted: roundsCompleted,
-          roundsSet: '',
-          notes: ''
-        }
-      }
-    })
-      .then(() => <Redirect to={
-        { pathname: '/records', state: { msg: messages.saveSuccess } }
-      } />
-        .catch(error => {
-          console.error(error)
-          enqueueSnackbar(messages.saveFailure, { variant: 'error' })
-        }))
-  }
+  // axios({
+  //   url: `${apiUrl}/records`,
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'Authorization': `Token token=${this.props.user.token}`
+  //   },
+  //   data: {
+  //     record: {
+  //       date: dateToday,
+  //       roundsCompleted: roundsCompleted,
+  //       roundsSet: '',
+  //       notes: ''
+  //     }
+  //   }
+  // })
 
   render () {
     const { count } = this.state
+    const roundsCompleted = this.state.count
+    // const dateToday = new Date().getDate()
+    const { enqueueSnackbar, user } = this.props
+    const data = {
+      record: {
+        date: '2010-11-11',
+        rounds_completed: roundsCompleted,
+        notes: ''
+      }
+    }
     return (
       <nav>
         <Grid container justify = "center">
@@ -64,7 +62,19 @@ class Counter extends Component {
             +
           </button>
         </Grid>
-        <button>
+        <button onClick={() => {
+          console.log(user)
+          create(user, data)
+            .then(() => <Redirect to={
+              { pathname: '/records', state: { msg: messages.saveSuccess } }
+            } />
+            )
+            .catch(error => {
+              console.error(error)
+              enqueueSnackbar(messages.saveFailure, { variant: 'error' })
+            })
+        }
+        }>
         Save
         </button>
       </nav>

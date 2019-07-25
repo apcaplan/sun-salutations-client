@@ -4,7 +4,7 @@ import axios from 'axios'
 // import { Link } from 'react-router-dom'
 // import Layout from '../Layout'
 // import { ReactVirtualizedTable }, { MuiVirtualizedTablen } from './RecordsTable2'
-import SimpleTable from './Test'
+import SimpleTable from './RecordsTable'
 // import ReactVirtualizedTable from './RecordsTable2'
 // import MaterialTable from 'material-table'
 
@@ -29,7 +29,6 @@ class Records extends Component {
 
   render () {
     const { records, error } = this.state
-    console.log(records)
     // const recordsList = records.map(record => (
     //   <li key={record.id}>
     //     <Link to={`/records/${record.id}`}>{record.date} {record.rounds_completed} {record.rounds_set} {record.notes}</Link>
