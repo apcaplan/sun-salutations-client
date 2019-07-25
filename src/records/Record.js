@@ -3,13 +3,13 @@ import { Link, Redirect, withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../apiConfig'
 import Layout from '../Layout'
+// import { destroy } from '../api'
 
 const Record = props => {
   const [record, setRecord] = useState(null)
   const [deleted, setDeleted] = useState(false)
 
   useEffect(() => {
-    console.log('token is:', props.user.token)
     axios(`${apiUrl}/records/${props.match.params.id}`, {
       headers: { Authorization: `Token token=${props.user.token}` }
     })

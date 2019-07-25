@@ -1,25 +1,22 @@
 import React from 'react'
 import MaterialTable from 'material-table'
 
-export default function MaterialTableDemo () {
+export default function RecordsTableFunction ({ records }) {
   const [state, setState] = React.useState({
     columns: [
       { title: 'Date', field: 'date' },
-      { title: 'Rounds Completed', field: 'roundsCompleted' },
-      { title: 'Rounds Planned', field: 'roundsSet', type: 'numeric' },
-      {
-        title: 'Notes', field: 'notes',
-        lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' }
-      }
+      { title: 'Rounds Completed', field: 'rounds_completed' },
+      { title: 'Rounds Planned', field: 'rounds_set', type: 'numeric' },
+      { title: 'Notes', field: 'notes' }
     ],
     data: [
-      {recordsList}
+      { records }
     ]
   })
 
   return (
     <MaterialTable
-      title="Editable Example"
+      title="Record/Progress"
       columns={state.columns}
       data={state.data}
       editable={{

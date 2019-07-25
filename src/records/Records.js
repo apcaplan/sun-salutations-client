@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import apiUrl from '../apiConfig'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import Layout from '../Layout'
+// import { Link } from 'react-router-dom'
+// import Layout from '../Layout'
+// import { ReactVirtualizedTable }, { MuiVirtualizedTablen } from './RecordsTable2'
+import SimpleTable from './Test'
+// import ReactVirtualizedTable from './RecordsTable2'
+// import MaterialTable from 'material-table'
 
 class Records extends Component {
   constructor (props) {
@@ -25,11 +29,12 @@ class Records extends Component {
 
   render () {
     const { records, error } = this.state
-    const recordsList = records.map(record => (
-      <li key={record.id}>
-        <Link to={`/records/${record.id}`}>{record.date} {record.rounds_completed} {record.rounds_set} {record.notes}</Link>
-      </li>
-    ))
+    console.log(records)
+    // const recordsList = records.map(record => (
+    //   <li key={record.id}>
+    //     <Link to={`/records/${record.id}`}>{record.date} {record.rounds_completed} {record.rounds_set} {record.notes}</Link>
+    //   </li>
+    // ))
 
     // if (!loaded) {
     //   return <p>Loading...</p>
@@ -44,12 +49,13 @@ class Records extends Component {
     }
 
     return (
-      <Layout>
-        <h4>Record/Progress</h4>
-        <ul>
-          {recordsList}
-        </ul>
-      </Layout>
+      <nav>
+        <h1>Progress Record</h1>
+        <SimpleTable
+          records={ records }
+          user={this.props.user}
+        />
+      </nav>
     )
   }
 }
