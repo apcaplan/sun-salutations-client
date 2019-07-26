@@ -19,6 +19,14 @@ body {
   font-size: 1.1em;
 }
 
+.recordless {
+  align-items: center;
+  display: flex;
+  font-size: 1.2em;
+  justify-content: center;
+  position: fixed;
+}
+
 .salute {
   background-image: url('../img/Sun Salute.jpg');
   background-repeat: no-repeat;
