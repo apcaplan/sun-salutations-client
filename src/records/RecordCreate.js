@@ -33,7 +33,7 @@ class RecordCreate extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log(this.props.user.token)
+
     axios({
       url: `${apiUrl}/records`,
       method: 'POST',
@@ -63,7 +63,7 @@ class RecordCreate extends Component {
 
     return (
       <Layout>
-        <h4>Create new record </h4>
+        <h2>Create new record </h2>
         <RecordForm
           record = {record}
           handleChange = {handleChange}

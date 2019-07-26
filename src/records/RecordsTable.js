@@ -1,53 +1,88 @@
 import React from 'react'
-import MaterialTable from 'material-table'
+import { makeStyles } from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+import { Link, withRouter } from 'react-router-dom'
+import Fab from '@material-ui/core/Fab'
+import AddIcon from '@material-ui/icons/Add'
+import { destroy } from './recordApi'
+import { withSnackbar } from 'notistack'
+import messages from '../auth/messages'
 
-export default function RecordsTableFunction ({ records }) {
-  const [state, setState] = React.useState({
-    columns: [
-      { title: 'Date', field: 'date' },
-      { title: 'Rounds Completed', field: 'rounds_completed' },
-      { title: 'Rounds Planned', field: 'rounds_set', type: 'numeric' },
-      { title: 'Notes', field: 'notes' }
-    ],
-    data: [
-      { records }
-    ]
-  })
+const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: 'transparent',
+    width: '100%',
+    marginTop: theme.spacing(3),
+    overflowX: 'auto'
+  },
+  table: {
+    minWidth: 650
+  },
+  fab: {
+    margin: theme.spacing(1),
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'fixed'
+    // bottom: theme.spacing(2)
+  }
+}))
+
+const SimpleTable = (props) => {
+  const classes = useStyles()
+  const { enqueueSnackbar, records, user, refresh } = props
 
   return (
-    <MaterialTable
-      title="Record/Progress"
-      columns={state.columns}
-      data={state.data}
-      editable={{
-        onRowAdd: newData =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve()
-              const data = [...state.data]
-              data.push(newData)
-              setState({ ...state, data })
-            }, 600)
-          }),
-        onRowUpdate: (newData, oldData) =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve()
-              const data = [...state.data]
-              data[data.indexOf(oldData)] = newData
-              setState({ ...state, data })
-            }, 600)
-          }),
-        onRowDelete: oldData =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve()
-              const data = [...state.data]
-              data.splice(data.indexOf(oldData), 1)
-              setState({ ...state, data })
-            }, 600)
-          })
-      }}
-    />
+    <Paper className={classes.root}>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Date</TableCell>
+            <TableCell>Rounds completed</TableCell>
+            <TableCell>Rounds set</TableCell>
+            <TableCell>Notes</TableCell>
+            <TableCell>Actions</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody className={classes.body}>
+          {records.map(row => (
+            <TableRow key={row.date}>
+              <TableCell component="th" scope="row">
+                {row.date}
+              </TableCell>
+              <TableCell>{row.rounds_completed}</TableCell>
+              <TableCell>{row.rounds_set}</TableCell>
+              <TableCell>{row.notes}</TableCell>
+              <TableCell>
+                <Link to={`/records/${row.id}/edit-record`}>
+                  <button>Edit</button>
+                </Link>
+                <button color="secondary" onClick={() => {
+                  destroy(row.id, user)
+                  // .then(() => setDeleted(true))
+                    .then(() => enqueueSnackbar(messages.destroySuccess, { variant: 'success' }))
+                    .then(() => refresh())
+                    .catch(error => {
+                      console.error(error)
+                      enqueueSnackbar(messages.destroyFailure, { variant: 'error' })
+                    })
+                }
+                }>Delete Record</button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <Fab color="primary" aria-label="add" className={classes.fab} component={Link} to='/add-record'>
+          <AddIcon />
+        </Fab>
+      </Table>
+    </Paper>
   )
 }
+
+export default withSnackbar(withRouter(SimpleTable))

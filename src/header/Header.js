@@ -5,11 +5,13 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
+// import IconButton from '@material-ui/core/IconButton'
+// import MenuIcon from '@material-ui/icons/Menu'
+import './Header.scss'
 
 const useStyles = makeStyles(theme => ({
   root: {
+    color: '#03a5fc !important',
     flexGrow: 1
   },
   menuButton: {
@@ -27,9 +29,6 @@ const Header = ({ user }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" className={classes.title}>
              Sun Salutations
           </Typography>
@@ -39,7 +38,6 @@ const Header = ({ user }) => {
               <Button className={classes.menuButton} component={Link} to="/suryaNamaskar">Practice!</Button>
               <Button className={classes.menuButton} component={Link} to="/counter">Rounds Tracker</Button>
               <Button className={classes.menuButton} component={Link} to="/records">Show Records</Button>
-              <Button className={classes.menuButton} component={Link} to="/add-record">Add Record</Button>
               <Button className={classes.menuButton} component={Link} to="/change-password">Change Password</Button>
               <Button className={classes.menuButton} component={Link} to="/sign-out">Sign Out</Button>
             </React.Fragment>
@@ -47,22 +45,12 @@ const Header = ({ user }) => {
             <React.Fragment>
               <Button className={classes.menuButton} component={Link} to="/sign-up">Sign Up</Button>
               <Button className={classes.menuButton} component={Link} to="/sign-in">Sign In</Button>
-              <Button className={classes.menuButton} component={Link} to="/">Home</Button>
             </React.Fragment>
           ) }
         </Toolbar>
       </AppBar>
     </div>
   )
-
-  // <header className="main-header">
-  //   <h1>Sun Salutations</h1>
-  //   <nav>
-  //     { user && <span>Welcome, {user.email}</span>}
-  //     { user ? authenticatedOptions : unauthenticatedOptions }
-  //     { alwaysOptions }
-  //   </nav>
-  // </header>
 }
 
 export default Header

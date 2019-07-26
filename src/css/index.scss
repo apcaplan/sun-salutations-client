@@ -1,7 +1,35 @@
 body {
+  background-image: url('../img/sun.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   font-family: sans-serif;
+  height: 100%;
   margin: 0;
   padding: 0;
+}
+
+.home {
+  background-image: url('../img/108 Sun Salutations.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+}
+
+.layout {
+  font-size: 1.1em;
+}
+
+.salute {
+  background-image: url('../img/Sun Salute.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+.sun {
+  background-image: url('../img/sun.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .alert {

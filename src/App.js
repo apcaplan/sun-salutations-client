@@ -54,13 +54,13 @@ class App extends Component {
           <AuthenticatedRoute user={user} exact path='/records' render={() => (
             <Records alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/records/:id' render={() => (
+          <AuthenticatedRoute user={user} exact path='/records/:id' render={() => (
             <Record alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/records/:id/edit-record' render={() => (
             <RecordEdit alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/counter' render={() => (
+          <AuthenticatedRoute user={user} exact path='/counter' render={() => (
             <Counter alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/SuryaNamaskar' render={() => (
