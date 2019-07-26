@@ -96,7 +96,6 @@ class Counter extends Component {
           </Button>
         </Grid>
         <Button2 class="secondButton" onClick={() => {
-          console.log(user)
           create(user, data)
             .then(() => <Redirect to={
               { pathname: '/records', state: { msg: messages.saveSuccess } }
