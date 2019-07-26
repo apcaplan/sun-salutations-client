@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'fixed'
+    position: 'relative'
     // bottom: theme.spacing(2)
   }
 }))
@@ -51,7 +51,7 @@ const SimpleTable = (props) => {
         </TableHead>
         <TableBody className={classes.body}>
           {records.map(row => (
-            <TableRow key={row.date}>
+            <TableRow key={row.id}>
               <TableCell component="th" scope="row">
                 {row.date}
               </TableCell>

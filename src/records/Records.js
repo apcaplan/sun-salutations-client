@@ -7,6 +7,31 @@ import axios from 'axios'
 import SimpleTable from './RecordsTable'
 // import ReactVirtualizedTable from './RecordsTable2'
 // import MaterialTable from 'material-table'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import { transparentize, lighten } from 'polished'
+
+const baseColor = '#485ccf'
+const borderRadius = '3px'
+
+const Button = styled.button`
+  border: 0;
+  border-radius: ${borderRadius};
+  margin: 1rem;
+  padding: 1rem;
+  font-size: 100%;
+  color: white;
+  background-color: ${lighten(-0.125, baseColor)};
+
+  &:hover {
+    background-color: ${baseColor};
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem ${transparentize('0.7', baseColor)};
+  }
+`
 
 class Records extends Component {
   constructor (props) {
@@ -44,11 +69,16 @@ class Records extends Component {
     // }
 
     if (records.length === 0) {
-      return <p>No records to display yet</p>
+      return <div className='recordless'>
+        <p>No records to display yet</p>
+        <Button color="primary" aria-label="add" component={Link} to='/add-record'>
+          Add a record
+        </Button>
+      </div>
     }
 
     if (error) {
-      return <p>ERROR: {error}</p>
+      return <p className='recordless'>ERROR: {error}</p>
     }
 
     return (

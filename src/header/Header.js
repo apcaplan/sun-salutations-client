@@ -30,7 +30,7 @@ const Header = ({ user }) => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-             Sun Salutations
+             108 Sun Salutations
           </Typography>
           { user && <span>Welcome, {user.email}</span>}
           { user ? (

@@ -17,7 +17,8 @@ const anjaneyasana = require('../img/anjaneyasana.jpeg')
 const anuvittasana = require('../img/anuvittasana.jpeg')
 const ashtangaNamaskarasana = require('../img/ashtanga namaskarasana.jpeg')
 const bhujangasana = require('../img/bhujangasana.jpeg')
-const pranamasana = require('../img/pranamasana.jpeg')
+// const pranamasana = require('../img/pranamasana.jpeg')
+const pranamasana = require('../img/8.jpeg')
 const uttanasana = require('../img/uttanasana.jpeg')
 
 const tutorialSteps = [
