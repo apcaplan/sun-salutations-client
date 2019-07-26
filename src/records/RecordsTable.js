@@ -15,6 +15,7 @@ import messages from '../auth/messages'
 
 const useStyles = makeStyles(theme => ({
   root: {
+    backgroundColor: 'transparent',
     width: '100%',
     marginTop: theme.spacing(3),
     overflowX: 'auto'
@@ -24,20 +25,23 @@ const useStyles = makeStyles(theme => ({
   },
   fab: {
     margin: theme.spacing(1),
-    justifyContent: 'center'
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'fixed'
+    // bottom: theme.spacing(2)
   }
 }))
 
 const SimpleTable = (props) => {
   const classes = useStyles()
-  const { enqueueSnackbar, records, user } = props
+  const { enqueueSnackbar, records, user, refresh } = props
 
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Id</TableCell>
             <TableCell>Date</TableCell>
             <TableCell>Rounds completed</TableCell>
             <TableCell>Rounds set</TableCell>
@@ -45,12 +49,9 @@ const SimpleTable = (props) => {
             <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody className={classes.body}>
           {records.map(row => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
+            <TableRow key={row.date}>
               <TableCell component="th" scope="row">
                 {row.date}
               </TableCell>
@@ -61,14 +62,14 @@ const SimpleTable = (props) => {
                 <Link to={`/records/${row.id}/edit-record`}>
                   <button>Edit</button>
                 </Link>
-                <button onClick={() => {
+                <button color="secondary" onClick={() => {
                   destroy(row.id, user)
                   // .then(() => setDeleted(true))
                     .then(() => enqueueSnackbar(messages.destroySuccess, { variant: 'success' }))
-                    .then(() => (props.history.push('./records')))
+                    .then(() => refresh())
                     .catch(error => {
                       console.error(error)
-                      enqueueSnackbar(messages.destroyFailure, { variant: 'danger' })
+                      enqueueSnackbar(messages.destroyFailure, { variant: 'error' })
                     })
                 }
                 }>Delete Record</button>

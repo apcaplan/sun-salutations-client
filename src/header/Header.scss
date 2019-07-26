@@ -1,5 +1,12 @@
 $charcoal: #bbb;
 
+$base: '#485ccf';
+
+.primary {
+  background-color: $base;
+  transition: background-color .5s;
+}
+
 .main-header {
   align-items: center;
   border-bottom: 1px solid $charcoal;

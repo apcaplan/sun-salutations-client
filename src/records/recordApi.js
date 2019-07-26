@@ -19,7 +19,6 @@ export const update = (id, user, data) => {
 }
 
 export const create = (user, data) => {
-  console.log(data)
   return axios({
     url: `${apiUrl}/records`,
     method: 'POST',

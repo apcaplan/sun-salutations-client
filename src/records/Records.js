@@ -19,12 +19,16 @@ class Records extends Component {
     }
   }
 
-  componentDidMount () {
+  refresh = () => {
     axios(`${apiUrl}/records`, {
       headers: { Authorization: `Token token=${this.props.user.token}` }
     })
       .then(res => this.setState({ records: res.data.records }))
       .catch(err => this.setState({ error: err.stack }))
+  }
+
+  componentDidMount () {
+    this.refresh()
   }
 
   render () {
@@ -48,11 +52,12 @@ class Records extends Component {
     }
 
     return (
-      <nav>
+      <nav className='salute'>
         <h1>Progress Record</h1>
         <SimpleTable
           records={ records }
           user={this.props.user}
+          refresh={ this.refresh }
         />
       </nav>
     )

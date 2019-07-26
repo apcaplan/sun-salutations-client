@@ -1,8 +1,7 @@
 import React from 'react'
 
 const Layout = props => (
-  <div>
-    <h1>Progress Record</h1>
+  <div className="layout">
 
     {props.children}
 

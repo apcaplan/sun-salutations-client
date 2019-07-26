@@ -149,7 +149,6 @@ function SuryaNamaskar () {
           }
         />
       </div>
-      <h2>Rounds completed:</h2>
     </Grid>
   )
 }
