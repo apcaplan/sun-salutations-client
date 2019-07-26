@@ -61,7 +61,7 @@ class App extends Component {
             <RecordEdit alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/counter' render={() => (
-            <Counter alert={this.alert} user={user} />
+            <Counter alert={this.alert} user={user} history={this.props.history}/>
           )} />
           <AuthenticatedRoute user={user} path='/SuryaNamaskar' render={() => (
             <SuryaNamaskar alert={this.alert} user={user} />

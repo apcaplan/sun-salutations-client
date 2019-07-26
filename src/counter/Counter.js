@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid'
 // import axios from 'axios'
 // import apiUrl from '../apiConfig'
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 import { withSnackbar } from 'notistack'
 import messages from '../auth/messages'
 import { create } from '../records/recordApi'
@@ -97,10 +97,10 @@ class Counter extends Component {
         </Grid>
         <Button2 class="secondButton" onClick={() => {
           create(user, data)
-            .then(() => <Redirect to={
-              { pathname: '/records', state: { msg: messages.saveSuccess } }
-            } />
-            )
+            .then(() => {
+              // this.props.history.push('/records')
+              enqueueSnackbar(messages.saveSuccess, { variant: 'success' })
+            })
             .catch(error => {
               console.error(error)
               enqueueSnackbar(messages.saveFailure, { variant: 'error' })
