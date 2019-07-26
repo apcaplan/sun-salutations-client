@@ -70,7 +70,8 @@ class Records extends Component {
 
     if (records.length === 0) {
       return <div className='recordless'>
-        <p>No records to display</p>
+        <p>No records to display.</p>
+        {''}
         <p>To create one: click on Rounds Tracker above, then save the count from your next practice!</p>
       </div>
       // <Button component={Link} to="/add-record">Add a record</Button>
