@@ -8,13 +8,12 @@ import SignUp from './auth/components/SignUp'
 import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
-
+import Home from './home/Home'
 import RecordCreate from './records/RecordCreate'
 import Records from './records/Records'
 import Record from './records/Record'
 import RecordEdit from './records/RecordEdit'
 import Counter from './counter/Counter'
-import SuryaNamaskar from './suryaNamaskar/SuryaNamaskar'
 
 class App extends Component {
   constructor () {
@@ -42,6 +41,9 @@ class App extends Component {
           <Route path='/sign-in' render={() => (
             <SignIn alert={this.alert} setUser={this.setUser} />
           )} />
+          <Route exact path='/' render={() => (
+            <Home alert={this.alert} setUser={this.setUser} />
+          )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
           )} />
@@ -62,9 +64,6 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} exact path='/counter' render={() => (
             <Counter alert={this.alert} user={user} />
-          )} />
-          <AuthenticatedRoute user={user} path='/SuryaNamaskar' render={() => (
-            <SuryaNamaskar alert={this.alert} user={user} />
           )} />
         </main>
       </SnackbarProvider>

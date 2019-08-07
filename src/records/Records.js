@@ -83,7 +83,7 @@ class Records extends Component {
 
     return (
       <nav className='salute'>
-        <h1>Progress Record</h1>
+        <h1 style={ { margin: '0', width: '100%' } }>Progress Record</h1>
         <SimpleTable
           records={ records }
           user={this.props.user}

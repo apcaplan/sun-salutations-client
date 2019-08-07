@@ -18,12 +18,16 @@ const sun = require('../img/sun-button.jpeg')
 const Button = styled.button`
 border: 0;
 border-radius: ${borderRadius};
+margin-top: 2rem;
 padding: .65rem 1rem;
 `
 
 const Button2 = styled.button`
   border: 0;
   border-radius: ${borderRadius};
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+  margin-top: 7rem;
   padding: .65rem 1rem;
   font-size: 200%;
   color: white;
@@ -83,18 +87,25 @@ class Counter extends Component {
         notes: ''
       }
     }
+
     // const classes = () => { useStyles() }
 
     return (
       <nav>
         <Grid container justify = "center">
-          <h2> Count: { count } </h2>
+          <h2 style={ { fontSize: '3rem', textAlign: 'center' } } > Count: { count } </h2>
         </Grid>
         <Grid container justify = "center">
           <Button>
             <img src={sun} width="350" alt="+" onClick={() => this.incrementCounter()} />
           </Button>
         </Grid>
+        {roundsCompleted === 0 &&
+        <h4 style={ { color: 'white', fontSize: '1.3rem', textAlign: 'center' } } >Click on the sun at the end of each round of sun salutations.
+          <br />
+          When you&#39;re done, click the save button to log your practice!
+        </h4>
+        }
         <Button2 class="secondButton" onClick={() => {
           console.log(user)
           create(user, data)
