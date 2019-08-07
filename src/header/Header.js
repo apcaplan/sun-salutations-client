@@ -30,12 +30,11 @@ const Header = ({ user }) => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-             108 Sun Salutations
+             Sun Salutations
           </Typography>
-          { user && <span>Welcome, {user.email}</span>}
+          { user && <span style={ { marginRight: '7rem' } } >Welcome, {user.email}</span>}
           { user ? (
             <React.Fragment>
-              <Button className={classes.menuButton} component={Link} to="/suryaNamaskar">Practice!</Button>
               <Button className={classes.menuButton} component={Link} to="/counter">Rounds Tracker</Button>
               <Button className={classes.menuButton} component={Link} to="/records">Show Records</Button>
               <Button className={classes.menuButton} component={Link} to="/change-password">Change Password</Button>

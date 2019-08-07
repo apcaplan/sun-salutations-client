@@ -1,53 +1,17 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { Component, Fragment } from 'react'
+import { withRouter, Link } from 'react-router-dom'
 import { withSnackbar } from 'notistack'
 import { signIn } from '../api'
 import messages from '../messages'
-import styled from 'styled-components'
-import { transparentize, lighten } from 'polished'
-
-const baseColor = '#485ccf'
-const borderRadius = '3px'
-
-const Input = styled.input`
-  border-radius: ${borderRadius};
-  border: 1px solid lightgray;
-  padding: .5rem .75rem;
-  font-size: 100%;
-  display: block;
-  width: 100%;
-  margin: 0 0 1rem;
-  outline: none;
-
-  &:focus {
-    box-shadow: 0 0 0 0.2rem ${transparentize('0.7', baseColor)};
-  }
-`
-const Form = styled.form`
-  max-width: 500px;
-  margin: 1rem auto;
-
-  > h3 {
-    margin: 3rem 0 1rem;
-  }
-`
-const Button = styled.button`
-  border: 0;
-  border-radius: ${borderRadius};
-  padding: .65rem 1rem;
-  font-size: 100%;
-  color: white;
-  background-color: ${lighten(-0.125, baseColor)};
-
-  &:hover {
-    background-color: ${baseColor};
-  }
-
-  &:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem ${transparentize('0.7', baseColor)};
-  }
-`
+import '../../css/auth.scss'
+// import styled from 'styled-components'
+// import { transparentize, lighten } from 'polished'
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Typography from '@material-ui/core/Typography'
+import TextField from '@material-ui/core/TextField'
+import Paper from '@material-ui/core/Paper'
 
 class SignIn extends Component {
   constructor () {
@@ -71,7 +35,7 @@ class SignIn extends Component {
     signIn(this.state)
       .then(res => setUser(res.data.user))
       .then(() => enqueueSnackbar(messages.signInSuccess, { variant: 'success' }))
-      .then(() => history.push('/'))
+      .then(() => history.push('/counter'))
       .catch(error => {
         console.error(error)
         this.setState({ email: '', password: '' })
@@ -83,28 +47,69 @@ class SignIn extends Component {
     const { email, password } = this.state
 
     return (
-      <Form className='auth-form' onSubmit={this.onSignIn}>
-        <h3>Sign In</h3>
-        <label htmlFor="email">Email</label>
-        <Input
-          required
-          type="email"
-          name="email"
-          value={email}
-          placeholder="Email"
-          onChange={this.handleChange}
-        />
-        <label htmlFor="password">Password</label>
-        <Input
-          required
-          name="password"
-          value={password}
-          type="password"
-          placeholder="Password"
-          onChange={this.handleChange}
-        />
-        <Button type="submit">Sign In</Button>
-      </Form>
+      <Fragment>
+        <div className="auth-container">
+          <Paper style={{ maxWidth: '500px', margin: 'auto', backgroundColor: '#F1F1F1' }}>
+            <CssBaseline />
+            <div className="auth-style">
+              <Grid container direction="row" spacing={1}>
+                <Grid container direction="row" item xs={9} md={9} lg={9}>
+                  <Typography component="h1" variant="h5" style={{ width: '50%' }}>
+                    Sign In
+                  </Typography>
+                </Grid>
+              </Grid>
+              <form className="form" onSubmit={this.onSignIn}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      type="email"
+                      required
+                      fullWidth
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      value={email}
+                      onChange={this.handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="password"
+                      label="Password"
+                      name="password"
+                      value={password}
+                      type="password"
+                      onChange={this.handleChange}
+                    />
+                  </Grid>
+                </Grid>
+                <div className="auth-btn-submit">
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                  >
+                Sign In
+                  </Button>
+                </div>
+                <Grid container justify="flex-end" style={{ marginTop: '0.5em' }}>
+                  <Grid item>
+                    <Link to="/sign-up" variant="body2">
+                  Sign up to create an account
+                    </Link>
+                  </Grid>
+                </Grid>
+              </form>
+            </div>
+          </Paper>
+        </div>
+      </Fragment>
     )
   }
 }

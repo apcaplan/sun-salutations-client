@@ -12,6 +12,8 @@ import AddIcon from '@material-ui/icons/Add'
 import { destroy } from './recordApi'
 import { withSnackbar } from 'notistack'
 import messages from '../auth/messages'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/DeleteRounded'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,7 +23,11 @@ const useStyles = makeStyles(theme => ({
     overflowX: 'auto'
   },
   table: {
-    minWidth: 650
+    minWidth: 650,
+    fontSize: '2rem'
+  },
+  cell: {
+    fontSize: '1.2rem'
   },
   fab: {
     margin: theme.spacing(1),
@@ -30,6 +36,9 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     position: 'relative'
     // bottom: theme.spacing(2)
+  },
+  label: {
+    fontSize: '1.5rem'
   }
 }))
 
@@ -42,27 +51,27 @@ const SimpleTable = (props) => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Rounds completed</TableCell>
-            <TableCell>Rounds set</TableCell>
-            <TableCell>Notes</TableCell>
-            <TableCell>Actions</TableCell>
+            <TableCell className={classes.label}>Date</TableCell>
+            <TableCell className={classes.label}>Rounds completed</TableCell>
+            <TableCell className={classes.label}>Rounds set</TableCell>
+            <TableCell className={classes.label}>Notes</TableCell>
+            <TableCell> </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody className={classes.body}>
+        <TableBody>
           {records.map(row => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
+            <TableRow key={row.id} className={classes.tablerow}>
+              <TableCell className={classes.cell} component="th" scope="row">
                 {row.date}
               </TableCell>
-              <TableCell>{row.rounds_completed}</TableCell>
-              <TableCell>{row.rounds_set}</TableCell>
-              <TableCell>{row.notes}</TableCell>
-              <TableCell>
+              <TableCell className={classes.cell}>{row.rounds_completed}</TableCell>
+              <TableCell className={classes.cell}>{row.rounds_set}</TableCell>
+              <TableCell className={classes.cell}>{row.notes}</TableCell>
+              <TableCell className={classes.cell}>
                 <Link to={`/records/${row.id}/edit-record`}>
-                  <button>Edit</button>
+                  <EditIcon style={ { color: '#000', paddingRight: '6px' } } />
                 </Link>
-                <button color="secondary" onClick={() => {
+                <DeleteIcon color="secondary" onClick={() => {
                   destroy(row.id, user)
                   // .then(() => setDeleted(true))
                     .then(() => enqueueSnackbar(messages.destroySuccess, { variant: 'success' }))
@@ -72,7 +81,7 @@ const SimpleTable = (props) => {
                       enqueueSnackbar(messages.destroyFailure, { variant: 'error' })
                     })
                 }
-                }>Delete Record</button>
+                }/>
               </TableCell>
             </TableRow>
           ))}
